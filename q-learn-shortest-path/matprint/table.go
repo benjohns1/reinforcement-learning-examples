@@ -2,9 +2,10 @@ package matprint
 
 import (
 	"fmt"
-	"gonum.org/v1/gonum/mat"
 	"strconv"
 	"strings"
+
+	"gonum.org/v1/gonum/mat"
 )
 
 // TableCfg configures the string print function.
@@ -38,7 +39,7 @@ func Precision(p int) func(cfg *TableCfg) {
 }
 
 // Headers shows or hides column and row headers.
-func Headers(row, col bool)  func(cfg *TableCfg) {
+func Headers(row, col bool) func(cfg *TableCfg) {
 	return func(cfg *TableCfg) {
 		cfg.RowHeader = row
 		cfg.ColHeader = col
@@ -147,7 +148,7 @@ func header(cols, prepad int, pad int, sep string) []string {
 	numbers := fmt.Sprintf("%s%s", prepadStr, strings.Join(hs, sep))
 
 	var divider string
-	divLen += len(sep) * (cols-1) + prepad
+	divLen += len(sep)*(cols-1) + prepad
 	for i := divLen; i > 0; i-- {
 		divider += "-"
 	}
