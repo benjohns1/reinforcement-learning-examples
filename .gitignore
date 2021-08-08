@@ -1,1 +1,7 @@
+# Ignore files without an extension (e.g. binaries)
+*
+!*.*
+!*/
+
 .idea
+*.exe
