@@ -1,11 +1,31 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"log"
+
+	"github.com/benjohns1/neural-net-go/matutil"
+	"gonum.org/v1/gonum/mat"
+)
 
 func main() {
 	fmt.Println("Q-Learning: Finding the shortest path")
+	if err := run(); err != nil {
+		log.Fatal(err)
+	}
+}
+
+func run() error {
+
+	// todo 1. create environment matrix for agent to explore, (-1 = impassable, 0 = passable, 1 = goal)
+	env, err := createEnvironment()
+	if err != nil {
+		return err
+	}
+	fmt.Printf("%+v", env)
+
+
 	// todo:
-	//  1. create environment matrix for agent to explore, (-1 = impassable, 0 = passable, 1 = goal)
 	//  2. create reward matrix from environment, rows & cols = # of cells in environment, determines reward when
 	//     transitioning from one cell to another
 	//      - negative reward for transitions to & from impassable cells
@@ -22,4 +42,15 @@ func main() {
 	//      - getAvailableActions, sampleNextAction, update state
 	//  7. use Q-table to step through from starting state, choosing next action with max value (random breaks tie)
 	//      - result should be optimal path
+
+
+	return nil
+}
+
+func createEnvironment() (*mat.Dense, error) {
+	env, err := matutil.New(5, 5, matutil.FillArray(25, 0))
+	if err != nil {
+		return nil, err
+	}
+	return env, nil
 }
